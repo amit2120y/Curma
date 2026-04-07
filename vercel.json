@@ -1,0 +1,22 @@
+{
+  "builds": [
+    {
+      "src": "wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "wsgi.py"
+    }
+  ],
+  "env": {
+    "FLASK_ENV": "production",
+    "SQLALCHEMY_TRACK_MODIFICATIONS": "False"
+  }
+}
