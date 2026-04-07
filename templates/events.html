@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Schedule | Onam 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .pookalam-bg {
+            background-color: #fffaf0; /* Warm off-white */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f59e0b' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="pookalam-bg min-h-screen font-sans antialiased text-gray-900">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-orange-100 px-6 py-4">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <span class="text-xl font-black text-orange-600 tracking-tighter">Curma</span>
+            <a href="/" class="group flex items-center text-orange-600 font-bold transition-all hover:text-orange-700">
+                <span class="mr-2 transition-transform group-hover:-translate-x-1">←</span> 
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto py-12 px-6">
+        <header class="mb-16" data-aos="fade-up">
+            <h1 class="text-5xl font-black text-gray-900 mb-4">The Festival <span class="text-orange-600">Schedule</span></h1>
+            <p class="text-lg text-gray-600 max-w-2xl leading-relaxed">
+                Experience the heritage of Kerala right here on campus. From vibrant Pookalams to the grand Sadya, explore all the events lined up for the day.
+            </p>
+        </header>
+
+        <div class="grid gap-8">
+            {% if events %}
+                {% for event in events %}
+                <div class="group relative bg-white p-8 rounded-3xl shadow-sm border border-orange-50 hover:shadow-xl hover:shadow-orange-100 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-3/4 bg-gradient-to-b from-yellow-400 to-orange-600 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h3 class="text-2xl font-extrabold text-gray-800">{{ event.title }}</h3>
+                                <span class="bg-orange-100 text-orange-700 px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-widest">Live Soon</span>
+                            </div>
+                            
+                            <div class="flex flex-wrap items-center gap-y-2 gap-x-6 text-sm font-medium text-orange-600">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    {{ event.time }}
+                                </span>
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    {{ event.venue }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-6 text-gray-600 leading-relaxed text-lg border-t border-orange-50 pt-6">
+                        {{ event.description }}
+                    </p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="text-center py-20 bg-white rounded-3xl border border-dashed border-orange-200">
+                    <p class="text-gray-400 font-medium italic">No events have been published by the admin yet. Check back soon!</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+</body>
+</html>
